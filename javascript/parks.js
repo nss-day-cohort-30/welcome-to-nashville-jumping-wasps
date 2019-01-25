@@ -1,4 +1,4 @@
-// SAM'S FILE STAY OUT
+SAM'S FILE STAY OUT
 
 const parkInputEl = document.querySelector("#parkLookup")
 const parkButton = document.querySelector("#parkLookupButton")
