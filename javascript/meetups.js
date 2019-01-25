@@ -1,124 +1,142 @@
 const meetupCategories = [
     {
-    name: "Music",
-    id: 103    
-    },  
-    {
-    name: "Business & Professional",
-    id: 101    
-    },  
-    {
-    name: "Food & Drink",
-    id: 110    
-    },    
-    {
-    name: "Community & Culture",
-    id: 113    
-    },    
-    {
-    name: "Performing & Visual Arts",
-    id: 105    
-    },   
-    {
-    name: "Film, Media & Entertainment",
-    id: 104    
+        name: "music",
+        id: 103
     },
     {
-    name: "Sports & Fitness",
-    id: 108    
+        name: "business",
+        id: 101
     },
     {
-    name: "Health & Wellness",
-    id: 107    
+        name: "food",
+        id: 110
     },
     {
-    name: "Science & Technology",
-    id: 102   
+        name: "community",
+        id: 113
     },
     {
-    name: "Travel & Outdoor",
-    id: 109  
+        name: "performing",
+        id: 105
     },
     {
-    name: "Charity & Causes",
-    id: 111   
+        name: "film",
+        id: 104
     },
     {
-    name: "Religion & Spirituality",
-    id: 114  
+        name: "sports",
+        id: 108
     },
     {
-    name: "Charity & Causes",
-    id: 111   
+        name: "health",
+        id: 107
     },
     {
-    name: "Family & Education",
-    id: 115  
+        name: "science",
+        id: 102
     },
     {
-    name: "Seasonal & Holiday",
-    id: 116 
+        name: "travel",
+        id: 109
     },
     {
-    name: "Government and Politics",
-    id: 112
+        name: "charity",
+        id: 111
     },
     {
-    name: "Fashion & Beauty",
-    id: 106
+        name: "religion",
+        id: 114
     },
     {
-    name: "Home & Lifestyle",
-    id: 117
+        name: "charity",
+        id: 111
     },
     {
-    name: "Auto, Boat & Air",
-    id: 118
+        name: "family",
+        id: 115
     },
     {
-    name: "Hobbies & Special Interest",
-    id: 119
+        name: "seasonal",
+        id: 116
     },
     {
-    name: "Other",
-    id: 199
+        name: "government",
+        id: 112
     },
     {
-    name: "School Activities",
-    id: 120
-    }      
+        name: "fashion",
+        id: 106
+    },
+    {
+        name: "lifestyle",
+        id: 117
+    },
+    {
+        name: "auto",
+        id: 118
+    },
+    {
+        name: "hobbies",
+        id: 119
+    },
+    {
+        name: "other",
+        id: 199
+    },
+    {
+        name: "school",
+        id: 120
+    }
 ]
 
-function categoryToTextChanger (id) {
-    
+function categoryToTextChanger(userInput) {
+
+    fetch(`https://www.eventbriteapi.com/v3/events/search/?q=nashville&token=PH4Q5M2GK4DX7EHSYBVN`, {
+        headers: {
+            "Accept": "application/json"
+        },
+    })
+        .then(meetups => meetups.json())
+        .then(parsedMeetups => {
+            let userInput = document.querySelector("#meetupLookup").value
+            parsedMeetups.events.forEach(event => {
+                meetupCategories.forEach(function (element) {
+                    if (element.name === userInput) {
+                        let catId = element.id
+                        console.log(catId)
+                        fetch(`https://www.eventbriteapi.com/v3/events/search/?q=nashville&categories=${catId}&search_type=promoted&token=PH4Q5M2GK4DX7EHSYBVN`, {
+                            headers: {
+                                "Accept": "application/json"
+                            },
+                        })
+                            .then(events => events.json())
+                            .then(parsedEvents => {
+                            console.log(parsedEvents)        
+                                let counter = 1
+                                parsedEvents.events.forEach(event => {
+                                     let meetupObject = {
+                                        name: events.name.text
+                                    }
+
+                                    meetups.push(meetupObject)
+                                    document.querySelector("displayResultsSection").innerHTML += createMeetupHTML
+                                    counter++
+                                })
+                            }
+                            );
+                        }
+            })
+        })
+    })
 }
 
+    
+document.querySelector("#meetupLookupButton").addEventListener("click", categoryToTextChanger)
 
+meetupInput.addEventListener("click", (event) => {
+                let outputField = outputField.innerHTML
+            })
 
-const meetupInput = document.querySelector("#meetupLookup")
-const meetupButton = document.querySelector("meetupLookupButton")
-
-// meetupButton.addEventListener("click", (event)=>{
-//     const outputField = meetupInput.innerHTML
-// })
-
-fetch(`https://www.eventbriteapi.com/v3/events/search/?q=nashville&token=PH4Q5M2GK4DX7EHSYBVN`, {
-    headers: {
-        "Accept": "application/json"
-      },
-})
-    .then(meetups => meetups.json())
-    .then(parsedMeetups => {
-        parsedMeetups.events.array.forEach(event => {
-            if (parsedMeetups.events.name.text === userSearch) {
-                let meetupId = events.category_id
-            }
-        });
-    })  
-       
-        console.log(parsedMeetups)
-        // let outputMeetup = events.name.text    
-        // createMeetupHTML(outputMeetup)
 
 
 
@@ -126,7 +144,6 @@ const createMeetupHTML = () => {
     return `
     <section class="result">
     <p>Name of Event: ${events.name.text} </p>
-    </section>
+    </section>  
     `
-}    
-
+}
