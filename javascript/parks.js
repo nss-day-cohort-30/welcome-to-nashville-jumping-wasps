@@ -1,44 +1,28 @@
 // SAM'S FILE STAY OUT
 
-const parkInputEl = document.querySelector("#parkLookup")
+let parkInputEl = document.querySelector("#parkLookup").value
 const parkButton = document.querySelector("#parkLookupButton")
-const inputValue = ""
-let url = "https://data.nashville.gov/resource/xbru-cfzi.json?$$app_token=jnv0TSHBEnWnvTmofx6UjW0U5"
 
-// fetch(url)
-//   .then(parkData => parkData.json())
-//   .then(parsedParkData => {
-//     parsedParkData.forEach(park => {
-//         if (parkInputEl === ) {
-//             console.log(park_name)
-//             return park.park_name
-//         }
-//     })
-//   })
+parkButton.addEventListener("click", function(){
+    const parkInputEl = document.querySelector("#parkLookup").target.id
+    getParksStuff(parkInputEl)
+})
 
-  https://data.nashville.gov/resource/xbru-cfzi.json?
-
-//   const inputValue
-//   if (park[input] === "yes") {
-//       return park_name
-//   }
-
-fetch(url)
+const getParksStuff = (id) => {
+fetch(`https://data.nashville.gov/resource/xbru-cfzi.json?${id}=Yes&$$app_token=jnv0TSHBEnWnvTmofx6UjW0U5`)
     .then(parkData => parkData.json())
     .then(parsedParkData => {
-        parsedParkDat.forEach(park => {
-            if (parkInputEl === `https://data.nashville.gov/resource/xbru-cfzi.json?${parkInputEl}$$app_token=jnv0TSHBEnWnvTmofx6UjW0U5`) {
-
-            }
+        parsedParkData.forEach(park => {
+                document.querySelector("#displayResultsSection").innerHTML += createParkDom(park)
         });
     })
+}
 
-    const createParkDom  = () => {
-        return `
-        <div class="domParkDiv">
-            <p class="domParkEl">park_name</p>
-        </div>
-        `
-    }
-
-  
+const createParkDom  = (park) => {
+    return `
+    <div class="domParkDiv">
+        <p class="domParkEl">${park.park_name} at ${park.mapped_location_address}</p>
+        
+    </div>
+    `
+} 

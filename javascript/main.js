@@ -1,0 +1,1 @@
+document.querySelector("#restuarantLookupButton").addEventListener("click", getRestaurantFromCuisine)
