@@ -26,3 +26,4 @@ const createParkDom  = (park) => {
     </div>
     `
 } 
+
