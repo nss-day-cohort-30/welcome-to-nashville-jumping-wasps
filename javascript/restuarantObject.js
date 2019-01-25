@@ -1,0 +1,5 @@
+let restaurantObject = {
+    name : "",
+    address: ""
+}
+
