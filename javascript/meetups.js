@@ -19,12 +19,12 @@ function categoryToTextChanger() {
                     name: event.name.text,
                     url: event.logo.original.url
                 }
-                document.querySelector("#displayResultsSection").innerHTML += createMeetupHTML(event, counter)
+                document.querySelector(".meetupSection").innerHTML += createMeetupHTML(event, counter)
                 meetups.push(meetupObject)
                 counter++
 
             })
-            document.querySelector("#displayResultsSection").addEventListener("click", createResultsSection)
+            document.querySelector(".meetupSection").addEventListener("click", createResultsSection)
         })
 }
 
