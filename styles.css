@@ -5,14 +5,48 @@ body {
 header {
     font-weight: 200;
     font-size: 2em;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+.parkSection {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid black;
+    margin: 10px;
+}
+.restaurantSection {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid black;
+    margin: 10px;
+}
+.meetupSection {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid black;
+    margin: 10px;
+}
+.concertSection {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid black;
+    margin: 10px;
 }
 
 #inputSection {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-#displayResultsSection {
+/* #displayResultsSection {
     display: flex;
     border: 1px solid black;
-}
+} */
