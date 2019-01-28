@@ -16,36 +16,37 @@ const parkInfo = (id) => {
     fetch(`https://data.nashville.gov/resource/xbru-cfzi.json?${id}=Yes&$$app_token=jnv0TSHBEnWnvTmofx6UjW0U5`)
         .then(parkData => parkData.json())
         .then(parsedParkData => {
+            // function to clear old results and empty current park array EACH time the button is clicked
             bigRedDeleteButton()
+            // counter to track number of parks
             let counter = 0
+            // building park object
             parsedParkData.forEach(park => {
                 let parkObject = {
                     name: park.park_name,
                     address: park.mapped_location_address
                 }
-                // I want to clear out the old information in the DOM before submitting more.
-                
+                // counter comes into play in order to log x number of parks to DOM. push printed parks to larger park object
                 if (counter < 5) {
                     document.querySelector(".parkSection").innerHTML += createParkDom(park, counter)
                     counter++
                     parkArray.push(parkObject)
-                    console.log(parkArray)
                 }
             })
         })
     }
     
-    // dom creater
-    // TODO would love to make this prettier, my god
+    // DOM creator
     const createParkDom = (park,counter) => {
         return `
-        <div class="domParkDiv">
+        <div class="domDiv">
         <label class="domParkEl">${park.park_name} at ${park.mapped_location_address}</label>
         <button id="${park.park_name}--${counter}" class="saveButton">Save</button>
         </div>
         `
     }
-    
+
+    // "save" button attached to objects pasted to DOM. "save" button moves item to results section
     const createListenerForResults = () => {
         const newStringArray = event.target.id.split("--")
         itineraryObject.park = parkArray[newStringArray[1]]
@@ -53,6 +54,8 @@ const parkInfo = (id) => {
         resultsCont.innerHTML += itineraryObject.park.name + " " + itineraryObject.park.address
         
     }
+
+    // targets for above function
     const resultsCont = document.querySelector("#itinerary")
     const parentCont = document.querySelector(".parkSection")
     parentCont.addEventListener("click", createListenerForResults)
