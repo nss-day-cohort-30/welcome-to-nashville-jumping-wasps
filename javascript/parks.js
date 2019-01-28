@@ -29,7 +29,7 @@ const parkInfo = (id) => {
                 }
 
                 if (counter < 5) {
-                    document.querySelector(".parkSection").classList.toggle("domDiv")
+                    document.querySelector(".parkSection").classList.add("addClass")
                     document.querySelector(".parkSection").innerHTML += createParkDom(park, counter)
                     counter++
                     parkArray.push(parkObject)
@@ -53,7 +53,8 @@ const parkInfo = (id) => {
         const newStringArray = event.target.id.split("--")
         itineraryObject.park = parkArray[newStringArray[1]]
         console.log(itineraryObject)
-        resultsCont.innerHTML += itineraryObject.park.name + " " + itineraryObject.park.address
+        // resultsCont.innerHTML += itineraryObject.park.name + " " + itineraryObject.park.address
+        itineraryObject.createItineraryHtml()
         
     }
 
