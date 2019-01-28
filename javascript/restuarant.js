@@ -35,22 +35,25 @@ function getRestaurantFromCuisine() {
                             //loop through each restaurant the our query brought up with the cuisine id
                             parsedrestaurants.restaurants.forEach(restaurant => {
 
-                                //create restaurant object to store so i can easily reference that objects data easily using the index(which relates to the button
-                                //id and label id of my new dom elements). I can also push this object later to the itineraryObject in itineraryObject.js for east
-                                //itinerary storage
-                                let restaurantObject = {
-                                    //storing the name to my object for each restaurant
-                                    name: restaurant.restaurant.name,
-                                    //storing the address to my object for each restaurant 
-                                    address: restaurant.restaurant.location.address
+
+                                if (counter < 6) {
+                                    //create restaurant object to store so i can easily reference that objects data easily using the index(which relates to the button
+                                    //id and label id of my new dom elements). I can also push this object later to the itineraryObject in itineraryObject.js for east
+                                    //itinerary storage
+                                    let restaurantObject = {
+                                        //storing the name to my object for each restaurant
+                                        name: restaurant.restaurant.name,
+                                        //storing the address to my object for each restaurant 
+                                        address: restaurant.restaurant.location.address
+                                    }
+
+                                    //push restaurant to the restaurants array so its stored
+                                    restaurants.push(restaurantObject);
+
+                                    //select the area we will display the results. We update the html using a function that returns the html
+                                    document.querySelector(".restaurantSection").innerHTML += createNewRestuarantDomElement(restaurantObject, counter);
+                                    counter++;
                                 }
-
-                                //push restaurant to the restaurants array so its stored
-                                restaurants.push(restaurantObject);
-
-                                //select the area we will display the results. We update the html using a function that returns the html
-                                document.querySelector("#restuarantLookup").innerHTML += createNewRestuarantDomElement(restaurantObject, counter);
-                                counter++;
                             })
                             createListenerForResultsSection();
                         })
@@ -59,8 +62,8 @@ function getRestaurantFromCuisine() {
         })
 
 
-        //function that creates our new dom elements with html. uses the counter so that we have unique ids we can easily access later.
-        //also uses our restaurant object to fill in data that needs to be filled in
+    //function that creates our new dom elements with html. uses the counter so that we have unique ids we can easily access later.
+    //also uses our restaurant object to fill in data that needs to be filled in
     const createNewRestuarantDomElement = (restaurantObject, counter) => {
         return `
         <section class = "result">
@@ -85,8 +88,8 @@ function createListenerForResultsSection() {
 function constructRestaurantObject(event) {
     //this splits first part of our button id to make sure its a buton
     if (event.target.id.split("--")[0] === "restaurantButton") {
-          
-                                                          //this below gets our restaurants object at correct array index
+
+        //this below gets our restaurants object at correct array index
         let textContentToSaveToItinerary = restaurants[event.target.id.split("--")[1] - 1].name
 
         //will need some code to add to object here. Do we want the object to just have four props each that hold
