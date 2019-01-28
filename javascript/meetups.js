@@ -21,6 +21,7 @@ function categoryToTextChanger() {
                     url: event.url
                 }
                 if (counter < 4) {
+                    document.querySelector(".meetupSection").classList.toggle("addClass")
                     document.querySelector(".meetupSection").innerHTML += createMeetupHTML(event, counter)
                     meetups.push(meetupObject)
                     console.log(meetups)
