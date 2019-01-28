@@ -21,7 +21,7 @@ function categoryToTextChanger() {
                     url: event.url
                 }
                 if (counter < 4) {
-                    document.querySelector(".meetupSection").classList.toggle("addClass")
+                    document.querySelector(".meetupSection").classList.add("addClass")
                     document.querySelector(".meetupSection").innerHTML += createMeetupHTML(event, counter)
                     meetups.push(meetupObject)
                     console.log(meetups)
@@ -36,7 +36,7 @@ function categoryToTextChanger() {
 // Print to DOM function
 const createMeetupHTML = (event, counter) => {
     return `
-    <section class="result">
+    <section class="">
     <a href="${event.url}"> ${event.name.text}</a>
     <button id="meetupLookupButton--${counter}">Save</button>
     </section>  
