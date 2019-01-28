@@ -25,7 +25,7 @@ const parkInfo = (id) => {
                 }
                 // I want to clear out the old information in the DOM before submitting more.
                 
-                if (counter < 4) {
+                if (counter < 5) {
                     document.querySelector(".parkSection").innerHTML += createParkDom(park, counter)
                     counter++
                     parkArray.push(parkObject)
@@ -40,7 +40,7 @@ const parkInfo = (id) => {
     const createParkDom = (park,counter) => {
         return `
         <div class="domParkDiv">
-        <p class="domParkEl">${park.park_name} at ${park.mapped_location_address}</p>
+        <label class="domParkEl">${park.park_name} at ${park.mapped_location_address}</label>
         <button id="${park.park_name}--${counter}" class="saveButton">Save</button>
         </div>
         `
@@ -50,8 +50,10 @@ const parkInfo = (id) => {
         const newStringArray = event.target.id.split("--")
         itineraryObject.park = parkArray[newStringArray[1]]
         console.log(itineraryObject)
+        resultsCont.innerHTML += itineraryObject.park.name + " " + itineraryObject.park.address
         
     }
+    const resultsCont = document.querySelector("#itinerary")
     const parentCont = document.querySelector(".parkSection")
     parentCont.addEventListener("click", createListenerForResults)
     
@@ -63,3 +65,5 @@ const parkInfo = (id) => {
     }
     parkArray = []
 }
+
+
