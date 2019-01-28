@@ -16,6 +16,7 @@ const parkInfo = (id) => {
     fetch(`https://data.nashville.gov/resource/xbru-cfzi.json?${id}=Yes&$$app_token=jnv0TSHBEnWnvTmofx6UjW0U5`)
         .then(parkData => parkData.json())
         .then(parsedParkData => {
+            bigRedDeleteButton()
             let counter = 0
             parsedParkData.forEach(park => {
                 let parkObject = {
@@ -23,38 +24,42 @@ const parkInfo = (id) => {
                     address: park.mapped_location_address
                 }
                 // I want to clear out the old information in the DOM before submitting more.
+                
                 if (counter < 4) {
-                    document.querySelector("#displayResultsSection").innerHTML += createParkDom(park, counter)
+                    document.querySelector(".parkSection").innerHTML += createParkDom(park, counter)
                     counter++
                     parkArray.push(parkObject)
                     console.log(parkArray)
                 }
             })
-            createListenerForResults()
         })
-}
-
-// dom creater
-// TODO would love to make this prettier, my god
-const createParkDom = (park,counter) => {
-    return `
-    <div class="domParkDiv">
+    }
+    
+    // dom creater
+    // TODO would love to make this prettier, my god
+    const createParkDom = (park,counter) => {
+        return `
+        <div class="domParkDiv">
         <p class="domParkEl">${park.park_name} at ${park.mapped_location_address}</p>
         <button id="${park.park_name}--${counter}" class="saveButton">Save</button>
-    </div>
-    `
+        </div>
+        `
+    }
+    
+    const createListenerForResults = () => {
+        const newStringArray = event.target.id.split("--")
+        itineraryObject.park = parkArray[newStringArray[1]]
+        console.log(itineraryObject)
+        
+    }
+    const parentCont = document.querySelector(".parkSection")
+    parentCont.addEventListener("click", createListenerForResults)
+    
+    // function to clear DOM everytime button is clicked. also clears array list
+    const bigRedDeleteButton = () => {
+    let clearNode = document.querySelector(".parkSection")
+    while (clearNode.firstChild) {
+        clearNode.removeChild(clearNode.firstChild)
+    }
+    parkArray = []
 }
-
-const createListenerForResults = () => {
-const parentCont = document.querySelector("#displayResultsSection")
-parentCont.addEventListener("click", function() {
-    const newStringArray = event.target.id.split("--")
-    itineraryObject.park = parkArray[newStringArray[1]]
-    console.log(itineraryObject)
-    })
-}
-
-// TO DO MONDAY
-// ------------
-// 2. Make "parks" array work correctly. Right now it is not storing variables.
-// 3. Push parks array object to super object
