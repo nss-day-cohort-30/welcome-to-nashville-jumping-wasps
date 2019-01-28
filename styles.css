@@ -62,6 +62,7 @@ h2 {
 }
 
 #itinerary {
-    display: flex;
-    flex-direction: column;
+    text-align: center;
+    border-radius: 16px;
+    border: 2px dotted maroon;
 }
