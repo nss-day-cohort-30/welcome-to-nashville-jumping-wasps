@@ -31,10 +31,10 @@ const parkInfo = (id) => {
                 }
             });
         })
-    // const parentCont = document.querySelector("#displayResultsSection")
-    // parentCont.addEventListener("click", function() {
-    //     itineraryObject.park = park
-    // })
+    const parentCont = document.querySelector("#displayResultsSection")
+    parentCont.addEventListener("click", function() {
+        itineraryObject.park = park
+    })
 }
 
 // dom creater
