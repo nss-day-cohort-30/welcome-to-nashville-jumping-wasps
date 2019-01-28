@@ -24,7 +24,6 @@ const parkInfo = (id) => {
                     address: park.mapped_location_address
                 }
                 // I want to clear out the old information in the DOM before submitting more.
-                
                 if (counter < 5) {
                     document.querySelector(".parkSection").innerHTML += createParkDom(park, counter)
                     counter++
