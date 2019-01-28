@@ -49,7 +49,7 @@ function getRestaurantFromCuisine() {
                                 restaurants.push(restaurantObject);
 
                                 //select the area we will display the results. We update the html using a function that returns the html
-                                document.querySelector("#displayResultsSection").innerHTML += createNewRestuarantDomElement(restaurantObject, counter);
+                                document.querySelector("#restuarantLookup").innerHTML += createNewRestuarantDomElement(restaurantObject, counter);
                                 counter++;
                             })
                             createListenerForResultsSection();
