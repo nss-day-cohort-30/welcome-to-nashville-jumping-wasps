@@ -31,6 +31,8 @@ function getRestaurantFromCuisine() {
                             //I make a counter so that I can store the new labels and button with a unique id that should match the counter closely
                             //because I am going to push to the array as I increment the counter.
                             let counter = 0;
+                            // function to clear DOM everytime button is clicked. also clears array list
+                                bigBlueDeleteButton();
 
                             //loop through each restaurant the our query brought up with the cuisine id
                             parsedrestaurants.restaurants.forEach(restaurant => {
@@ -55,6 +57,7 @@ function getRestaurantFromCuisine() {
                                     counter++;
                                 }
                             })
+
                             createListenerForResultsSection();
                         })
                 }
@@ -90,15 +93,24 @@ function constructRestaurantObject(event) {
     if (event.target.id.split("--")[0] === "restaurantButton") {
 
         //this below gets our restaurants object at correct array index
-        let textContentToSaveToItinerary = restaurants[event.target.id.split("--")[1]].name
-
+        itineraryObject.restaurant = restaurants[event.target.id.split("--")[1]]
         //will need some code to add to object here. Do we want the object to just have four props each that hold
         //the address and thing linked to that address or should we go further.
 
+        itineraryObject.createItineraryHtml()
         //print out the result we decided to save to itinerary. later itinerary will be built with our itinerary object
-        document.querySelector("#itinerary").innerHTML += textContentToSaveToItinerary;
+        
     }
 
+}
+
+
+const bigBlueDeleteButton = () => {
+    let clearNode = document.querySelector(".restaurantSection")
+    while (clearNode.firstChild) {
+        clearNode.removeChild(clearNode.firstChild)
+    }
+    restaurants = []
 }
 
 
