@@ -11,7 +11,7 @@ header {
 h2 {
     text-align: center;
 }
-.parkSection {
+/* .parkSection {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -38,17 +38,18 @@ h2 {
     text-align: center;
     border: 1px solid black;
     margin: 10px;
-}
+} */
 
-.domDiv {
-    display: flex;
-    flex-direction: column;
+
+/* document.querySelector(".YOURSection").classList.toggle("addClass") */
+
+
+.addClass {
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid silver;
+    border-radius: 16px;
     margin: 10px;
 }
-
-
 
 #inputSection {
     display: flex;

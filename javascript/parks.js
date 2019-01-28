@@ -17,7 +17,8 @@ const parkInfo = (id) => {
         .then(parkData => parkData.json())
         .then(parsedParkData => {
             // function to clear old results and empty current park array EACH time the button is clicked
-            bigRedDeleteButton()
+            bigRedDeleteButton(".parkSection", parkArray)
+            console.log(parkArray)
             // counter to track number of parks
             let counter = 0
             // building park object
@@ -28,6 +29,7 @@ const parkInfo = (id) => {
                 }
                 // counter comes into play in order to log x number of parks to DOM. push printed parks to larger park object
                 if (counter < 5) {
+                    document.querySelector(".parkSection").classList.toggle("domDiv")
                     document.querySelector(".parkSection").innerHTML += createParkDom(park, counter)
                     counter++
                     parkArray.push(parkObject)
@@ -59,14 +61,3 @@ const parkInfo = (id) => {
     const resultsCont = document.querySelector("#itinerary")
     const parentCont = document.querySelector(".parkSection")
     parentCont.addEventListener("click", createListenerForResults)
-    
-    // function to clear DOM everytime button is clicked. also clears array list
-    const bigRedDeleteButton = () => {
-    let clearNode = document.querySelector(".parkSection")
-    while (clearNode.firstChild) {
-        clearNode.removeChild(clearNode.firstChild)
-    }
-    parkArray = []
-}
-
-
