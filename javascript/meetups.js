@@ -25,7 +25,7 @@ function categoryToTextChanger() {
                  console.log(meetups)
                  counter++
                 }
-
+                
             })
             document.querySelector(".meetupSection").addEventListener("click", createResultsSection)
         })
