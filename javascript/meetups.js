@@ -19,9 +19,12 @@ function categoryToTextChanger() {
                     name: event.name.text,
                     url: event.logo.original.url
                 }
-                document.querySelector(".meetupSection").innerHTML += createMeetupHTML(event, counter)
-                meetups.push(meetupObject)
-                counter++
+                if (counter < 4) {
+                 document.querySelector(".meetupSection").innerHTML += createMeetupHTML(event, counter)
+                 meetups.push(meetupObject)
+                 console.log(meetups)
+                 counter++
+                }
 
             })
             document.querySelector(".meetupSection").addEventListener("click", createResultsSection)
