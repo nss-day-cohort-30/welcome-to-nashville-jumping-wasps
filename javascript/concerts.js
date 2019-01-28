@@ -19,8 +19,6 @@ fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=ajmmmSwdyGkP
 .then(response => response.json())
     .then(parsingTheData => {
         bigBurpleNurpleDeleteButton()
-        // console.log(parsingTheData)
-        // console.log(parsingTheData._embedded.events)
         let eventsDetails = parsingTheData._embedded.events
         let counter = 1;
         eventsDetails.forEach(eventsDetails => {
@@ -32,9 +30,6 @@ fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=ajmmmSwdyGkP
             let gettingTheAddressName = eventsDetails._embedded.venues.name
             let gettingTheAddressAddress = eventsDetails._embedded.venues[0].address.line1
             let gettingTheName = eventsDetails.name
-            console.log(gettingTheGenreId)
-            console.log(gettingTheGenreName)
-            console.log(gettingTheGenretype)
             let concertsInfoObject ={
                 name: `${gettingTheName}`,
                 address:`${gettingTheAddressAddress}`,
@@ -46,9 +41,6 @@ fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=ajmmmSwdyGkP
 
 
 
-        // })
-            // createListenerForResultsSection();
-            // console.log(eventsDetails)
 
         })
         document.querySelector("#displayResultsSection").addEventListener("click", constructConcertsObject)
@@ -57,9 +49,6 @@ fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=ajmmmSwdyGkP
 }
 document.querySelector("#concertLookupButton").addEventListener("click", checkTheSearhTaco)
 
-    // concertLookupButton.addEventListener("click", function (event) {
-    //     if
-    // })
 
 
     const createNewConcertsDomElement = (concertsInfoObject, counter) => {
@@ -72,7 +61,6 @@ document.querySelector("#concertLookupButton").addEventListener("click", checkTh
     }
 
     function constructConcertsObject(event) {
-        console.log("hi")
         if (event.target.id.split("--")[0] === "concertsButton") {
             itineraryObject.concert = concerts[event.target.id.split("--")[1] - 1]
             itineraryObject.createItineraryHtml()
@@ -83,8 +71,4 @@ document.querySelector("#concertLookupButton").addEventListener("click", checkTh
     const bigBurpleNurpleDeleteButton = () => {
         let clearNode = document.querySelector(".concertSection")
         clearNode.innerHTML = ""
-        // while (clearNode.firstChild) {
-        //     clearNode.removeChild(clearNode.firstChild)
-        // }
-        // parkArray = []
     }
