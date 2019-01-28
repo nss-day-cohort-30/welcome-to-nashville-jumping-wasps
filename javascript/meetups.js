@@ -44,9 +44,9 @@ const createMeetupHTML = (event, counter) => {
 
 function createResultsSection(event) {
     if (event.target.id.split("--")[0] === "meetupLookupButton") {
-        let saveMeetupsToItinerary = meetups[event.target.id.split("--")[1]].name
+        itineraryObject.meetup = meetups[event.target.id.split("--")[1]]
         // console.log(meetups[event.target.id.split("--")[1]].name)
-        document.querySelector("#itinerary").innerHTML += saveMeetupsToItinerary;
+        itineraryObject.createItineraryHtml()
     }
 }
 
