@@ -2,13 +2,12 @@
 let parkInputEl = document.querySelector("#parkLookup").value
 const parkButton = document.querySelector("#parkLookupButton")
 let filters = []
-let parks = []
+let parkArray = []
 
 // dropdown menu with event listener
 parkButton.addEventListener("click", function () {
     const parkInputEl = document.getElementById("parkLookup").selectedIndex
     const key = document.getElementById("parkLookup")[parkInputEl].id
-    console.log(key)
     parkInfo(key)
 })
 
@@ -23,33 +22,39 @@ const parkInfo = (id) => {
                     name: park.park_name,
                     address: park.mapped_location_address
                 }
-                parks.push(parkObject)
-                
+                // I want to clear out the old information in the DOM before submitting more.
                 if (counter < 4) {
-                    document.querySelector("#displayResultsSection").innerHTML += createParkDom(park)
+                    document.querySelector("#displayResultsSection").innerHTML += createParkDom(park, counter)
                     counter++
+                    parkArray.push(parkObject)
+                    console.log(parkArray)
                 }
-            });
+            })
+            createListenerForResults()
         })
-    const parentCont = document.querySelector("#displayResultsSection")
-    parentCont.addEventListener("click", function() {
-        itineraryObject.park = park
-    })
 }
 
 // dom creater
 // TODO would love to make this prettier, my god
-const createParkDom = (park) => {
+const createParkDom = (park,counter) => {
     return `
     <div class="domParkDiv">
         <p class="domParkEl">${park.park_name} at ${park.mapped_location_address}</p>
-        <button id="${park.park_name}--id" class="saveButton">Save</button>
+        <button id="${park.park_name}--${counter}" class="saveButton">Save</button>
     </div>
     `
 }
 
+const createListenerForResults = () => {
+const parentCont = document.querySelector("#displayResultsSection")
+parentCont.addEventListener("click", function() {
+    const newStringArray = event.target.id.split("--")
+    itineraryObject.park = parkArray[newStringArray[1]]
+    console.log(itineraryObject)
+    })
+}
+
 // TO DO MONDAY
 // ------------
-// 1. Breathe
 // 2. Make "parks" array work correctly. Right now it is not storing variables.
 // 3. Push parks array object to super object
