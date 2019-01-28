@@ -1,4 +1,5 @@
-
+// Empty meetup array
+let meetups = []
 
 // Event listener on search button
 document.querySelector("#meetupLookupButton").addEventListener("click", categoryToTextChanger)
@@ -12,18 +13,35 @@ function categoryToTextChanger() {
     })
         .then(meetups => meetups.json())
         .then(parsedMeetups => {
-        parsedMeetups.events.forEach(event => {
-            document.querySelector("#displayResultsSection").innerHTML += createMeetupHTML(event)
+            let counter = 0
+            parsedMeetups.events.forEach(event => {
+                let meetupObject = {
+                    name: event.name.text,
+                    url: event.logo.original.url
+                }
+                document.querySelector("#displayResultsSection").innerHTML += createMeetupHTML(event, counter)
+                meetups.push(meetupObject)
+                counter++
+
+            })
+            document.querySelector("#displayResultsSection").addEventListener("click", createResultsSection)
         })
-}) 
 }
 
 // Print to DOM function
-const createMeetupHTML = (event) => {
+const createMeetupHTML = (event, counter) => {
     return `
     <section class="result">
     <a href="${event.logo.original.url}"> ${event.name.text}</a>
+    <button id="meetupLookupButton--${counter}">Save</button>
     </section>  
     `
 }
 
+function createResultsSection(event) {
+    if (event.target.id.split("--")[0] === "meetupLookupButton") {
+       let saveMeetupsToItinerary = meetups[event.target.id.split("--")[1]].name
+        // console.log(meetups[event.target.id.split("--")[1]].name)
+        document.querySelector("#itinerary").innerHTML += saveMeetupsToItinerary;
+    }
+}
