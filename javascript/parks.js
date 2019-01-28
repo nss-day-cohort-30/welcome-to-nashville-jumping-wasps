@@ -25,7 +25,7 @@ const parkInfo = (id) => {
                 }
                 // I want to clear out the old information in the DOM before submitting more.
                 
-                if (counter < 4) {
+                if (counter < 5) {
                     document.querySelector(".parkSection").innerHTML += createParkDom(park, counter)
                     counter++
                     parkArray.push(parkObject)
