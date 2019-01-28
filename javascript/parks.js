@@ -27,7 +27,7 @@ const parkInfo = (id) => {
                     name: park.park_name,
                     address: park.mapped_location_address
                 }
-                // counter comes into play in order to log x number of parks to DOM. push printed parks to larger park object
+
                 if (counter < 5) {
                     document.querySelector(".parkSection").classList.toggle("domDiv")
                     document.querySelector(".parkSection").innerHTML += createParkDom(park, counter)

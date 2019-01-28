@@ -13,19 +13,20 @@ function categoryToTextChanger() {
     })
         .then(meetups => meetups.json())
         .then(parsedMeetups => {
+            bigGreenDeleteButton()
             let counter = 0
             parsedMeetups.events.forEach(event => {
                 let meetupObject = {
                     name: event.name.text,
-                    url: event.logo.original.url
+                    url: event.url
                 }
                 if (counter < 4) {
-                 document.querySelector(".meetupSection").innerHTML += createMeetupHTML(event, counter)
-                 meetups.push(meetupObject)
-                 console.log(meetups)
-                 counter++
+                    document.querySelector(".meetupSection").innerHTML += createMeetupHTML(event, counter)
+                    meetups.push(meetupObject)
+                    console.log(meetups)
+                    counter++
                 }
-                
+
             })
             document.querySelector(".meetupSection").addEventListener("click", createResultsSection)
         })
@@ -35,7 +36,7 @@ function categoryToTextChanger() {
 const createMeetupHTML = (event, counter) => {
     return `
     <section class="result">
-    <a href="${event.logo.original.url}"> ${event.name.text}</a>
+    <a href="${event.url}"> ${event.name.text}</a>
     <button id="meetupLookupButton--${counter}">Save</button>
     </section>  
     `
@@ -43,8 +44,16 @@ const createMeetupHTML = (event, counter) => {
 
 function createResultsSection(event) {
     if (event.target.id.split("--")[0] === "meetupLookupButton") {
-       let saveMeetupsToItinerary = meetups[event.target.id.split("--")[1]].name
+        let saveMeetupsToItinerary = meetups[event.target.id.split("--")[1]].name
         // console.log(meetups[event.target.id.split("--")[1]].name)
         document.querySelector("#itinerary").innerHTML += saveMeetupsToItinerary;
     }
+}
+
+const bigGreenDeleteButton = () => {
+    let clearNode = document.querySelector(".meetupSection")
+    while (clearNode.firstChild) {
+        clearNode.removeChild(clearNode.firstChild)
+    }
+    meetups = []
 }
